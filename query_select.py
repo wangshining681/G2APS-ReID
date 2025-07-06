@@ -23,9 +23,9 @@ for id_ in id_list_c0:
     img_X = []
     query_list = [[],[],[],[]]
     query = []
-    tmp_num += 1
-    if tmp_num > 10:
-        break
+    # tmp_num += 1
+    # if tmp_num > 10:
+    #     break
     
     os.makedirs(dist_id_path,exist_ok=True)
     print(dist_id_path)
@@ -57,9 +57,9 @@ for id_ in id_list_c3:
     img_X = []
     query_list = [[],[],[],[]]
     query = []
-    tmp_num += 1
-    if tmp_num > 10:
-        break
+    # tmp_num += 1
+    # if tmp_num > 10:
+    #     break
     os.makedirs(dist_id_path,exist_ok=True)
     print(dist_id_path)
     if osp.isdir(id_path):
