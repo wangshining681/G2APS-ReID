@@ -23,6 +23,28 @@ def data_split(full_list, ratio, shuffle=False):
     sublist_2 = full_list[offset:]
     return sublist_1, sublist_2
 
+
+def get_train_test_id():
+    """
+    数据集拆分: 将列表full_list按比例ratio（随机）划分为2个子列表sublist_1与sublist_2
+    :param full_list: 数据列表
+    :param ratio:     子列表1
+    :param shuffle:   子列表2
+    :return:
+    """
+    f=open('train_id.txt', encoding='gbk')
+    train_id_list = []
+    for line in f.readlines():
+        train_id_list.append(int(line.strip()))
+    print(len(train_id_list))
+    f=open('test_id.txt', encoding='gbk')
+    test_id_list = []
+    for line in f.readlines():
+        test_id_list.append(int(line.strip()))
+    print(len(test_id_list))
+    return train_id_list, test_id_list
+    
+
 f=open('info\small_id.txt', encoding='gbk')
 small_id_list = []
 for line in f.readlines():
@@ -40,21 +62,23 @@ path = r'./crop_img_person'
 file_list = os.listdir(path)
 dist_path = r'./G2APS-ReID/bounding_box_train/'
 # 划分训练集和测试集ID
-id_list = [x for x in range(1, 2788)]
-train_id_list, test_id_list = data_split(id_list, 0.5, shuffle=True)
-train_id_list.sort()
-test_id_list.sort()
-train_id_list.extend(small_id_list)
-train_id_list = list(set(train_id_list))
-test_id_list = [x for x in test_id_list if x not in small_id_list]
-print(len(train_id_list))
-print(len(test_id_list))
+# id_list = [x for x in range(1, 2788)]
+# train_id_list, test_id_list = data_split(id_list, 0.5, shuffle=True)
+# train_id_list.sort()
+# test_id_list.sort()
+# train_id_list.extend(small_id_list)
+# train_id_list = list(set(train_id_list))
+# test_id_list = [x for x in test_id_list if x not in small_id_list]
+# print(len(train_id_list))
+# print(len(test_id_list))
 
-train_id_list.extend(large_id_list)
-train_id_list = list(set(train_id_list))
-test_id_list = [x for x in test_id_list if x not in large_id_list]
-print(len(train_id_list))
-print(len(test_id_list))
+# train_id_list.extend(large_id_list)
+# train_id_list = list(set(train_id_list))
+# test_id_list = [x for x in test_id_list if x not in large_id_list]
+# print(len(train_id_list))
+# print(len(test_id_list))
+
+train_id_list, test_id_list = get_train_test_id()
 
 # 将训练集图片移动到指定文件夹
 file_list = os.listdir(path)
